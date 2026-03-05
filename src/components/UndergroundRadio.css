@@ -1,0 +1,43 @@
+.underground-radio {
+  background: #0a0a12;
+  color: #aaa;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  padding: 12px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.5s;
+}
+.radio-top { display: flex; justify-content: space-between; align-items: center; }
+.radio-freq { font-size: 1.4rem; font-weight: bold; font-style: italic; }
+.on-air { font-size: 0.7rem; animation: pulse 1.5s infinite; }
+.radio-station { }
+.station-title { font-size: 1rem; font-weight: bold; letter-spacing: 0.1em; }
+.station-sub   { font-size: 0.7rem; color: #555; }
+.vu-meter {
+  display: flex; align-items: flex-end; gap: 3px; height: 60px;
+}
+.vu-bar {
+  flex: 1; border-radius: 1px 1px 0 0;
+  animation: bounce linear infinite alternate;
+  transition: background 0.5s;
+}
+.radio-message {
+  flex: 1; font-size: 0.8rem; line-height: 1.6; color: #888;
+  min-height: 48px;
+}
+.cursor { animation: blink 0.7s step-end infinite; }
+.simulate-btn {
+  order: -1;
+  flex: 0 0 auto;
+  align-self: flex-end;
+  margin-bottom: 4px;
+  padding: 6px; background: transparent; border: 1px dashed #333;
+  color: #4a5568; font-family: 'Courier New', monospace; font-size: 0.7rem; cursor: pointer;
+}
+.simulate-btn:hover { border-color: #8b5cf6; color: #8b5cf6; }
+@keyframes pulse  { 0%,100% { opacity:1 } 50% { opacity:0.3 } }
+@keyframes blink  { 50% { opacity:0 } }
+@keyframes bounce { from { transform: scaleY(0.5) } to { transform: scaleY(1.5) } }
