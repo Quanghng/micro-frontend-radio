@@ -67,18 +67,24 @@ export default function UndergroundRadio() {
   }, [fullMessage]);
 
   useEffect(() => {
-    const unsubWeather = eventBus.on('weather:change', ({ condition } = {}) => {
-      if (condition !== 'storm') return;
-      applyState({
-        freq: '87.7',
-        name: 'NEON FM',
-        sub: '⚠️ ALERTE MÉTÉO',
-        color: 'red',
-        msg: '⚠️ ALERTE MÉTÉO - Pluie toxique détectée. Restez chez vous.',
-      });
+    const unsubWeather = eventBus.on('weather:change', ({ condition }) => {
+      if (condition === 'storm') {
+        applyState({
+          freq: '87.7',
+          name: 'NEON FM',
+          sub: '⚠️ ALERTE MÉTÉO',
+          color: 'red',
+          msg: '⚠️ ALERTE MÉTÉO - Pluie toxique détectée. Restez chez vous.',
+        });
+        eventBus.emit('radio:broadcast', {
+          message: '⚠️ ALERTE MÉTÉO - Pluie toxique détectée. Restez chez vous.',
+          frequency: '87.7',
+          isEmergency: true,
+        });
+      }
     });
 
-    const unsubPower = eventBus.on('power:outage', ({ severity } = {}) => {
+    const unsubPower = eventBus.on('power:outage', ({ severity }) => {
       if (severity === 'partial') {
         applyState({
           freq: '91.3',
@@ -86,6 +92,11 @@ export default function UndergroundRadio() {
           sub: '',
           color: 'orange',
           msg: '⚡ COUPURE ZONES B-D. Les équipes sont sur place.',
+        });
+        eventBus.emit('radio:broadcast', {
+          message: '⚡ COUPURE ZONES B-D. Les équipes sont sur place.',
+          frequency: '91.3',
+          isEmergency: true,
         });
       } else if (severity === 'total') {
         applyState({
@@ -95,10 +106,15 @@ export default function UndergroundRadio() {
           color: 'red',
           msg: '☠️ BLACKOUT TOTAL. La ville est dans le noir. Restez calmes.',
         });
+        eventBus.emit('radio:broadcast', {
+          message: '☠️ BLACKOUT TOTAL. La ville est dans le noir. Restez calmes.',
+          frequency: '91.3',
+          isEmergency: true,
+        });
       }
     });
 
-    const unsubHacker = eventBus.on('hacker:command', ({ command } = {}) => {
+    const unsubHacker = eventBus.on('hacker:command', ({ command }) => {
       if (command === 'riot') {
         applyState({
           freq: '666.6',
@@ -106,6 +122,11 @@ export default function UndergroundRadio() {
           sub: '',
           color: 'red',
           msg: 'LA RÉSISTANCE PARLE. LE MOMENT EST VENU. NEON CITY APPARTIENT AU PEUPLE.',
+        });
+        eventBus.emit('radio:broadcast', {
+          message: 'LA RÉSISTANCE PARLE. LE MOMENT EST VENU. NEON CITY APPARTIENT AU PEUPLE.',
+          frequency: '666.6',
+          isEmergency: true,
         });
       } else if (command === 'love') {
         applyState({
@@ -115,6 +136,11 @@ export default function UndergroundRadio() {
           color: 'green',
           msg: 'UN MESSAGE DE PAIX DE VOS HACKERS AMIS. AIMEZ-VOUS. LA NUIT EST BELLE.',
         });
+        eventBus.emit('radio:broadcast', {
+          message: 'UN MESSAGE DE PAIX DE VOS HACKERS AMIS. AIMEZ-VOUS. LA NUIT EST BELLE.',
+          frequency: '88.8',
+          isEmergency: false,
+        });
       } else if (command === 'reset') {
         applyState({
           freq: DEFAULTS.frequency,
@@ -123,9 +149,15 @@ export default function UndergroundRadio() {
           color: DEFAULTS.themeColor,
           msg: DEFAULTS.fullMessage,
         });
+        eventBus.emit('radio:broadcast', {
+          message: DEFAULTS.fullMessage,
+          frequency: DEFAULTS.frequency,
+          isEmergency: false,
+        });
       }
     });
 
+    // Cleanup: unsubscribe from all events on unmount
     return () => {
       unsubWeather();
       unsubPower();
