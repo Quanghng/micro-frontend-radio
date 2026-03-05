@@ -45,47 +45,16 @@ Messages urgents en machine à écrire.
 ```
 ## ⚡ RÉACTION PAR COMMANDE
 
-Brief opérationnel NeonCity - Jour 2
+| Commande | Votre réaction | Visuels |
+| :--- | :--- | :--- |
+| (initial) | 87.7 FM | Synthwave non-stop. La ville brille pour vous. |
+| `weather:change` storm | 87.7 FM | ⚠️ ALERTE MÉTÉO - Pluie toxique détectée. Restez chez vous. |
+| `power:outage` partial | 91.3 FM | ⚡ COUPURE ZONES B-D. Les équipes sont sur place. |
+| `power:outage` total | 91.3 FM | ☠️ BLACKOUT TOTAL. La ville est dans le noir. Restez calmes. |
+| `hacker:command` = 'riot' | 666.6 FM | LA RÉSISTANCE PARLE. LE MOMENT EST VENU. NEON CITY APPARTIENT AU PEUPLE. |
+| `hacker:command` = 'love' | 88.8 FM | 💕 UN MESSAGE DE PAIX. AIMEZ-VOUS. LA NUIT EST BELLE. |
+| `hacker:command` = 'reset' | 87.7 FM | Retour programme normal |
 
-
-```
-Commande Votre
-réaction
-Visuels
-```
-```
-(initial) 87. 7 FM Synthwave non-stop. La ville brille pour vous.
-```
-```
-weather:change
-storm
-87. 7 FM ⚠ ALERTE MÉTÉO - Pluie toxique détectée. Restez chez vous.
-```
-```
-power:outage partial 91. 3 FM ⚡ COUPURE ZONES B-D. Les équipes sont sur place.
-```
-```
-power:outage total 91. 3 FM ☠ BLACKOUT TOTAL. La ville est dans le noir. Restez calmes.
-```
-```
-hacker:command =
-'riot'
-```
-##### 666. 6 FM LA^ RÉSISTANCE^ PARLE.^ LE^ MOMENT^ EST^ VENU.^ NEON^ CITY
-
-##### APPARTIENT AU PEUPLE.
-
-```
-hacker:command =
-'love'
-```
-##### 88. 8 FM 💕 UN MESSAGE DE PAIX. AIMEZ-VOUS. LA NUIT EST BELLE.
-
-```
-hacker:command =
-'reset'
-87. 7 FM Retour programme normal
-```
 ## ✅ CRITÈRE DE SUCCÈS
 
 #### Ça marche si :
